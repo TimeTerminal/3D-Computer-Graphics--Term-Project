@@ -30,9 +30,12 @@ cmds.frameLayout (collapsable = True, label = "Girder and Pile")
 cmds.columnLayout ()
 
 cmds.intSliderGrp ('numGAndP', label = "Number of Girders & Piles", field = True, min = 1, max = 20, value = 3)
-#mds.colorSliderGrp ('roundedHoledBlockColour', label = "Colour", hsv = (220, 0.023, 0.514))
+
+cmds.colorSliderGrp ('roadDividerColour', label = "Colour", hsv = (220, 0.023, 0.514))
+#cmds.colorSliderGrp ('roundedHoledBlockColour', label = "Colour", hsv = (220, 0.023, 0.514))
+
 cmds.columnLayout ()
-cmds.button (label = "Create Girder and Piles", command = ('girderAndPile ()'))
+cmds.button (label = "Create Bridge", command = ('girderAndPile ()'))
 cmds.setParent ('..')
 
 cmds.setParent ('..')
@@ -76,6 +79,9 @@ def girderAndPile ():
     namespaceGirder = "Girder" + str (rnd)
     namespacePile = "Pile" + str (rnd)
     
+    rgb = cmds.colorSliderGrp ('roadDividerColour', query = True, rgbValue = True)
+    namespaceRoadDivider = "RoadDivider" + str (rnd)
+    
     cmds.select (clear = True)
     cmds.namespace (add = namespaceGirder)
     cmds.namespace (set = namespaceGirder)
@@ -108,3 +114,15 @@ def girderAndPile ():
         #Road
         cmds.polyCube (h = roadHeight, w = girderDepth + 400, d = roadDepth)
         cmds.move (0, girderHeight + pileHeight + (roadHeight / 2), 500 * i, a = True)
+        
+        #Dividers
+        cmds.polyPlane (w = 20, h = 60, sx = 1, sy = 1, n = namespaceRoadDivider)
+        cmds.move (0, (girderHeight + pileHeight + (roadHeight)) + 1, 500 * i, a = True)
+                
+        '''#myShader = cmds.shadingNode ('lambert', asShader = True, name = "blockMaterial")
+        #cmds.setAttr (namespaceGirder + ":" + namespacePile + ":blockMaterial.color", rgb[0], rgb[1], rgb[2], type = 'double3')
+        
+        selectionPrint = cmds.select (namespaceGirder + ":" + namespaceRoadDivider)
+        print (selectionPrint)
+        #cmds.hyperShade (assign = (namespaceGirder + ":" + namespacePile + ":blockMaterial"))
+        '''
