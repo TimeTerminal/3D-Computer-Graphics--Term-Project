@@ -72,6 +72,7 @@ def girderAndPile ():
     
     rnd = random.randrange (0, 1000)
     namespace_tmp = "Girder" + str (rnd)
+    
     cmds.select (clear = True)
     cmds.namespace (add = namespace_tmp)
     cmds.namespace (set = namespace_tmp)
@@ -98,8 +99,8 @@ def girderAndPile ():
         #Girder Type 3
         if girderSelect == 3:
             cmds.polyCube (h = girder1Height, w = girder1Width, d = girder1Depth, n = namespace_tmp)
+            #cmds.select (namespace_tmp + ':' + namespace_tmp)
+            cmds.move (200, namespace_tmp + ':Girder' + str (rnd + i) + '.e[7]', moveX = True, a = True)
+            cmds.move (-200, namespace_tmp + ':Girder' + str (rnd + i) + '.e[6]', moveX = True, a = True)
             cmds.move (0, pileHeight + (girder1Height / 2), i * 500, a = True)
-            cmds.rotate (180, 0, 0, r = True)
-            cmds.move (200, namespace_tmp + ':' + namespace_tmp + '.e[11]', moveX = True, a = True)
-            cmds.move (-200, namespace_tmp + ':' + namespace_tmp + '.e[10]', moveX = True, a = True)
-
+            
