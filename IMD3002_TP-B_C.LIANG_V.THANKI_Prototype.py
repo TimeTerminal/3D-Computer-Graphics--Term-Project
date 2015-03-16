@@ -66,41 +66,45 @@ def girderAndPile ():
     numberOfGAndP = cmds.intSliderGrp ('numGAndP', query = True, value = True)
     
     pileHeight = 300
-    girder1Height = 100
-    girder1Width = 170
-    girder1Depth = 100
+    girderHeight = 100
+    girderWidth = 170
+    girderDepth = 100
+    roadHeight = 35
+    roadDepth = 500
     
     rnd = random.randrange (0, 1000)
-    namespace_tmp = "Girder" + str (rnd)
+    namespaceGirder = "Girder" + str (rnd)
+    namespacePile = "Pile" + str (rnd)
     
     cmds.select (clear = True)
-    cmds.namespace (add = namespace_tmp)
-    cmds.namespace (set = namespace_tmp)
-    
+    cmds.namespace (add = namespaceGirder)
+    cmds.namespace (set = namespaceGirder)
     
     #Pile   
     for i in range (numberOfGAndP):
-        cmds.polyCube (h = pileHeight, w = girder1Width, d = girder1Depth)
+        cmds.polyCube (h = pileHeight, w = girderWidth, d = girderDepth, n = namespacePile)
         cmds.move (0, pileHeight / 2, i * 500, a = True)
         
         #Select me!
-        girderSelect = 3
+        girderSelect = 1
         
         #Girder Type 1
         if girderSelect == 1:
-            cmds.polyCube (h = girder1Height, w = girder1Width + 400, d = girder1Depth, n = namespace_tmp)
-            cmds.move (0, pileHeight + (girder1Height / 2), i * 500, a = True)            
+            cmds.polyCube (h = girderHeight, w = girderWidth + 230, d = girderDepth, n = namespaceGirder)
+            cmds.move (0, pileHeight + (girderHeight / 2), i * 500, a = True)            
             
         #Girder Type 2
         if girderSelect == 2:
-            cmds.polyCube (h = girder1Height, w = girder1Width, d = girder1Depth, n = namespace_tmp)
-            cmds.move (0, pileHeight + (girder1Height / 2), i * 500, a = True)
+            cmds.polyCube (h = girderHeight, w = girderWidth, d = girderDepth, n = namespaceGirder)
+            cmds.move (0, pileHeight + (girderHeight / 2), i * 500, a = True)
             
         #Girder Type 3
         if girderSelect == 3:
-            cmds.polyCube (h = girder1Height, w = girder1Width, d = girder1Depth, n = namespace_tmp)
-            #cmds.select (namespace_tmp + ':' + namespace_tmp)
-            cmds.move (200, namespace_tmp + ':Girder' + str (rnd + i) + '.e[7]', moveX = True, a = True)
-            cmds.move (-200, namespace_tmp + ':Girder' + str (rnd + i) + '.e[6]', moveX = True, a = True)
-            cmds.move (0, pileHeight + (girder1Height / 2), i * 500, a = True)
-            
+            cmds.polyCube (h = girderHeight, w = girderWidth, d = girderDepth, n = namespaceGirder)
+            cmds.move (200, namespaceGirder + ':Girder' + str (rnd + i) + '.e[7]', moveX = True, a = True)
+            cmds.move (-200, namespaceGirder + ':Girder' + str (rnd + i) + '.e[6]', moveX = True, a = True)
+            cmds.move (0, pileHeight + (girderHeight / 2), i * 500, a = True)
+        
+        #Road
+        cmds.polyCube (h = roadHeight, w = girderDepth + 400, d = roadDepth)
+        cmds.move (0, girderHeight + pileHeight + (roadHeight / 2), 500 * i, a = True)
