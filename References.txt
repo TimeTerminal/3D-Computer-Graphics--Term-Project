@@ -1,0 +1,5 @@
+U.S. Department of Transportation Controlling Criteria: http://safety.fhwa.dot.gov/geometric/pubs/mitigationstrategies/chapter3/3_lanewidth.htm
+
+British Columbia Bridge Standards and Procedures Manual: http://www.th.gov.bc.ca/publications/eng_publications/bridge/standards/BSM-Volume-1_2007/BSM_Vol-1_All_Sections_Aug_2007.pdf
+
+Maya commands: http://help.autodesk.com/cloudhelp/2015/ENU/Maya-Tech-Docs/CommandsPython/index.html
